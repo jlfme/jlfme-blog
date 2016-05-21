@@ -1,0 +1,12 @@
+{% extends 'madmin/base.html' %}
+{% load staticfiles %}
+{% block js %}
+<script type="text/javascript" src="/static/google-code-prettify/loader/run_prettify.js?autoload=true&amp;skin=sons-of-obsidian&amp;lang=css" defer="defer"></script>
+{% endblock %}
+{% block main %}
+<div class="container well">
+<div class="markdown-body">
+    {{ content|safe }}
+</div>
+</div>
+{% endblock %}

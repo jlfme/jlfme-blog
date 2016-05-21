@@ -1,0 +1,34 @@
+{% extends 'blog/include/base.html' %}
+{% block title %}首页{% endblock %}
+{% block seo_keywords %}首页{% endblock %}
+
+{% block main %}
+<div class="row">
+    <!---left start--->
+    <div class="col-md-10 col-lg-9">
+        <!---welcome start-->
+        <div id="welcome" class="well background-white">
+            <p>搜索页面</p>
+        </div>
+        <!---welcome end-->
+        <!---article detail start---->
+        {% include 'blog/include/article_all.html' %}
+        {% include 'blog/include/article_all.html' %}
+        {% include 'blog/include/article_all.html' %}
+        <!---article detail end---->
+        <!---pagination start---->
+        {% include 'blog/include/pagination.html' %}
+        <!---pagination end---->
+    </div>
+    <!-----left end----->
+
+    <!-----right start----------->
+    <div class="col-md-2 col-lg-3">
+        {% include 'blog/widgets/search.html' %}
+        {% include 'blog/widgets/article_hotest_other.html' %}
+        {% include 'blog/widgets/article_new.html' %}
+        {% include 'blog/widgets/article_hotest.html' %}
+    </div>
+    <!------right end------>
+</div>
+{% endblock %}

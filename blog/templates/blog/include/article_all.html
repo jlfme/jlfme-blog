@@ -1,0 +1,31 @@
+{% url 'blog:article_detail_view' article.id as article_url %}
+{% url 'blog:column_detail_view' article.column as column_url %}
+<!---article detail start---->
+<div class="well clearfix article-detail">
+    <div class="post-title underline clearfix">
+        <a href="{{ column_url }}">
+            <div class="pre-cat"><div class="pre-catinner btn">{{ article.column }}</div><div class="pre-catarrow"></div></div>
+        </a>
+        <h1><a href="{{ article_url }}">{{ article.title }}</a></h1>
+        <div class="post-info">
+            <span><span class="glyphicon glyphicon-calendar"></span>{{ article.pub_time | date:'Y-m-d' }}</span>
+            <span><span class="glyphicon glyphicon-comment"></span>91</span>
+            <span><span class="glyphicon glyphicon-eye-open"></span>{{ article.visit_total }}</span>
+            {% with tag_list=article.get_tags %}
+            <div class="post-tags">
+                <span class="glyphicon glyphicon-tags"></span>
+                {% for tag in tag_list %}
+                <a href="{% url 'blog:tag_detail_view' tag %}"><span class="label label-blog-6 btn">{{ tag }}</span></a>
+                {% endfor %}
+            </div>
+            {% endwith %}
+        </div>
+    </div>
+    <div class="post-content">
+        <p>linux 环境编程 一、linux 内存管理 1. 变量空间 linux 每运行一个程序都会在/proc内生成一个跟自己pid一样的文件夹，你面放着程序有关的信息
+        理 1. 变量空间 linux 每运行一个程序都会在/proc内生成一个跟自己pid一样的文件夹，你面放着程序有关的信息理 1. 变量
+        </p>
+        <a type="button" class="btn btn-blog pull-right hidden-xs"  href="{{ article_url }}">阅读全文</a>
+    </div>
+</div>
+<!---article detail end---->

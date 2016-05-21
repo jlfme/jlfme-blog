@@ -1,0 +1,59 @@
+{% extends 'blog/include/base.html' %}
+{% load staticfiles %}
+{% block title %}首页{% endblock %}
+{% block seo_keywords %}首页{% endblock %}
+{% block main %}
+<div class="row">
+    <!---left start--->
+    <div class="col-md-10 col-lg-9">
+        <div id="all_archives" class="well background-white">
+            <script type="text/javascript">
+                /**********显示文章链接*************/
+                $(document).ready(function(){
+                    $('.mon_list > li').click(function(){
+                        $(this).children('.post_list').toggle();
+                    });
+
+                    $('.year .glyphicon').click(function(){
+                        $(this).parent().parent().find('.post_list').toggle();
+                    });
+                })
+            </script>
+            <!---breadcrumb start---->
+            <ol class="breadcrumb background-breadcrumb">
+                <li><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li class="active">文章归档</li>
+            </ol>
+            <!---breadcrumb end---->
+            <!---archives start---->
+            {% for year, info_list in archives_list %}
+            <div class="archives">
+                <h3 class="year"><span class="glyphicon glyphicon-calendar"></span> {{ year }}年<span class="glyphicon glyphicon-list pull-right" title="全部展开"></span></h3>
+                <ul class="mon_list">
+                    {% for info in info_list %}
+                    <li><span class="mon">{{ info.month }}月</span><span class="mon-num">{{ info.articles.all | length }}篇</span>
+                        <ul class="list-group post_list display_none">
+                            {% for article in info.articles %}
+                            <li class="list-group-item"><span>22日：</span><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+            <!---archives end---->
+        </div>
+    </div>
+    <!-----left end----->
+
+    <!-----right start----------->
+    <div class="col-md-2 col-lg-3">
+        {% include 'blog/widgets/search.html' %}
+        {% include 'blog/widgets/article_hotest_other.html' %}
+        {% include 'blog/widgets/article_new.html' %}
+        {% include 'blog/widgets/article_hotest.html' %}
+    </div>
+    <!------right end------>
+</div>
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends 'blog/include/base.html' %}
+{% load staticfiles %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block seo_keywords %}{{ article.keywords }}{% endblock %}
+{% block seo_description %}{{ article.description }}{% endblock seo_description %}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'markdown-styles/markdown-one.css' %}">{% endblock %}
+{% block js %}<script type="text/javascript" src="/static/js-libs/common.js"></script>{% endblock %}
+{% block main %}
+<div class="row">
+    <!---left start--->
+    <div class="col-md-10 col-lg-9">
+        <!---article start----->
+        <div id="article-page" class="well background-white">
+            <ol class="breadcrumb background-breadcrumb">
+                <li><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li><a href="#">django</a></li>
+                <li class="active">正文</li>
+            </ol>
+
+            <div id="article">
+                <div class="article-title text-center"><h1>{{ article.title }}</h1></div>
+                <br/>
+                <div class="article-tags">
+                    <span class="glyphicon glyphicon-tags"></span>&nbsp;文章标签：&nbsp;
+                    {% for tag in article.get_tags %}
+                    <a href="{% url 'blog:tag_detail_view' tag %}"><span class="label label-blog-{{ forloop.counter }} btn">{{ tag }}</span></a>
+                    {% endfor %}
+                </div>
+                <hr/>
+                <div class="article-info">
+                    <span class="fa fa-user-circle"></span><span>作者：</span>jlfme&nbsp;｜&nbsp;
+                    <span class="glyphicon glyphicon-calendar"></span><span>发布时期：</span> {{ article.pub_time|date:"Y-m-d" }}&nbsp;｜&nbsp;
+                    <span class="glyphicon glyphicon-eye-open"></span><span>浏览量：</span><span>{{ article.visit_total }}</span>&nbsp;｜&nbsp;
+                    <span class="glyphicon glyphicon-thumbs-up"></span><span>点赞：{{ article.votes }}</span>
+                </div>
+                <!------------文章主体 start----------->
+                <div class="markdown-body">
+                    {{ article.markdown|safe }}
+                </div>
+                <!-----------文章主体 end-------------->
+
+                <div class="article-footer">
+                    <div class="text-center">
+                        <button class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span>点赞 <span class="badge">{{ article.votes }}</span></button>
+{#                        <button class="btn btn-default"><span class="glyphicon glyphicon-star-empty"></span>收藏</button>#}
+                        <button class="btn btn-default" id="share-article"><span class="fa fa-share"></span>转载markdown</button>
+                    </div>
+                    <div class="pre_and_next">
+                        <div class="pull-left">
+                            <span class="btn btn-info"><span class="glyphicon glyphicon-chevron-left"></span>上一篇</span>
+                            {% if article.previous_article %}
+                                <a href="{{ article.previous_article.get_absolute_url }}">{{ article.previous_article.title }}</a>
+                            {% else %}
+                                <a>没有了</a>
+                            {% endif %}
+                        </div>
+                        <div class="pull-right">
+                            {% if article.next_article %}
+                                <a href="{{ article.next_article.get_absolute_url }}">{{ article.next_article.title }}</a>
+                            {% else %}
+                                <a>没有了</a>
+                            {% endif %}
+                            <span class="btn btn-info">下一篇<span class="glyphicon glyphicon-chevron-right"></span></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--------article end------------>
+
+        <!---相关文章 start----->
+        <div class="well background-white">
+            <div class="row">
+                <div class="col-lg-6 pull-left">
+                    <ul class="list-group">
+                        <li class="list-group-item article-heading">
+                            <strong><span class="glyphicon glyphicon-list"></span><span> 相关文章</span></strong>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge-index badge-index-hot">1</span><a href="#">本网站开源喽的点点滴滴多多多~~基于Djang</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge-index badge-index-hot">2</span><a href="#">本网站开源喽的点点滴滴多多多~~基于Djang</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge-index badge-index-hot">3</span><a href="#">本网站开源喽的点点滴滴多多多~~基于Djang</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge-index">4</span><a href="#">本网站开源喽的点点滴滴多多多~~基于Djang</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge-index">5</span><a href="#">本网站开源喽的点点滴滴多多多~~基于Djang</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="col-lg-6 pull-right">
+                    <ul class="list-group">
+                        <li class="list-group-item article-heading">
+                            <strong><span class="glyphicon glyphicon-list"></span><span> 推荐文章</span></strong>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge-index badge-index-hot">1</span><a href="#">本网站开源喽的点点滴滴多多多~~基于Djang</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge-index badge-index-hot">2</span><a href="#">本网站开源喽的点点滴滴多多多~~基于Djang</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge-index badge-index-hot">3</span><a href="#">本网站开源喽的点点滴滴多多多~~基于Djang</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge-index">4</span><a href="#">本网站开源喽的点点滴滴多多多~~基于Djang</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge-index">5</span><a href="#">本网站开源喽的点点滴滴多多多~~基于Djang</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!---相关文章 end----->
+        <!--comment start---->
+        {% include 'blog/include/article_comments.html' %}
+        <!--comment end---->
+
+    </div>
+    <!-----left end----->
+
+    <!-----right start----------->
+    <div class="col-md-2 col-lg-3">
+        {% include 'blog/widgets/search.html' %}
+        {% include 'blog/widgets/article_hotest_other.html' %}
+        {% include 'blog/widgets/article_new.html' %}
+        {% include 'blog/widgets/article_hotest.html' %}
+    </div>
+    <!------right end------>
+
+</div>
+{% endblock %}

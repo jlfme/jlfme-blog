@@ -1,0 +1,59 @@
+{% extends 'blog/include/base.html' %}
+{% block title %}首页{% endblock %}
+{% block seo_keywords %}首页{% endblock %}
+{% block main %}
+<div class="row">
+    <!---left start--->
+    <div class="col-md-10 col-lg-9">
+        <!---标签页 start--->
+        <div class="well background-white">
+            <!--面包屑导航 start--->
+            <ol class="breadcrumb background-breadcrumb">
+                <li><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li class="active">标签</li>
+            </ol>
+            <!--面包屑导航 end--->
+            <!---热门标签 start---->
+            <div class="all-tags">
+                <h3 class="tags-top">
+                    <span class="glyphicon glyphicon-tags"></span> 热门标签
+                    <span class="glyphicon glyphicon-list pull-right" title="全部展开" data-toggle="collapse" data-target="#hot-tags-list"></span>
+                </h3>
+                <div id="hot-tags-list" class="tags-list">
+                    <a title="the5fire" target="_blank" href="http://www.the5fire.com" class="btn btn-primary">the5fire<span class="badge">11</span></a>
+                    <a title="the5fire" target="_blank" href="http://www.the5fire.com" class="btn btn-primary">the5fire<span class="badge">11</span></a>
+                    <a title="the5fire" target="_blank" href="http://www.the5fire.com" class="btn btn-primary">the5fire<span class="badge">11</span></a>
+                    <a title="the5fire" target="_blank" href="http://www.the5fire.com" class="btn btn-primary">the5fire<span class="badge">11</span></a>
+                </div>
+            </div>
+            <!---热门标签 end---->
+
+            <!---所有标签 start---->
+            <div class="all-tags">
+                <h3 class="tags-top">
+                    <span class="glyphicon glyphicon-tags"></span> 所有标签
+                    <span class="glyphicon glyphicon-chevron-up pull-right" title="全部展开" data-toggle="collapse" data-target="#all-tags-list"></span>
+                </h3>
+                <div id="all-tags-list" class="tags-list">
+                    {% for tag in tag_set %}
+                    <a title="{{ tag }}" target="_blank" href="{% url 'blog:tag_detail_view' tag %}" class="btn {{ tag_css_list | random }}">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <!---所有标签 end---->
+
+        </div>
+        <!---标签页 end--->
+    </div>
+    <!-----left end----->
+
+    <!-----right start----------->
+    <div class="col-md-2 col-lg-3">
+        {% include 'blog/widgets/search.html' %}
+        {% include 'blog/widgets/article_hotest_other.html' %}
+        {% include 'blog/widgets/article_new.html' %}
+        {% include 'blog/widgets/article_hotest.html' %}
+    </div>
+    <!------right end------>
+</div>
+{% endblock %}

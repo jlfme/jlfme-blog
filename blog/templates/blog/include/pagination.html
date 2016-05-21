@@ -1,0 +1,21 @@
+<div class="well background-white">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="previous"><a href="?page={{ page_obj.previous_page_number }}">上一页</a></li>
+        {% else %}
+        <li class="previous disabled"><a>上一页</a></li>
+        {% endif %}
+        <li class="active"><a>{{ page_obj.number }}</a></li>
+
+        {% if page_obj.number != paginator.num_pages %}
+        <li><a href="?page=2">{{paginator.num_pages}}</a></li>
+        {% endif %}
+
+
+        {% if page_obj.has_next %}
+        <li class="next"><a href="?page={{ page_obj.next_page_number }}">下一页</a></li>
+        {% else %}
+        <li class="next disabled"><a>下一页</a></li>
+        {% endif %}
+    </ul>
+</div>

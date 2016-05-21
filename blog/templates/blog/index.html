@@ -1,0 +1,41 @@
+{% extends 'blog/include/base.html' %}
+{% block title %}首页{% endblock %}
+{% block seo_keywords %}首页{% endblock %}
+
+{% block main %}
+<div class="row">
+    <!---left start--->
+    <div class="col-md-10 col-lg-9">
+        <!---welcome start-->
+        <div id="welcome" class="well background-white">
+            <p>欢迎来到我的个人博客，个人<code>QQ: 435158620</code>, 人生苦短,我用Python...</p>
+        </div>
+        <!---welcome end-->
+
+        <!---article list-->
+        {% if article_list %}
+        {% for article in article_list %}
+        {% include 'blog/include/article_all.html' %}
+        {% endfor %}
+        {% endif %}
+        <!---article end-->
+
+        <!---pagination start---->
+        {% if page_obj %}
+        {% include 'blog/include/pagination.html' %}
+        {% endif %}
+        <!---pagination end---->
+    </div>
+    <!-----left end----->
+
+    <!-----right start----------->
+    <div class="col-md-2 col-lg-3">
+        {% include 'blog/widgets/search.html' %}
+        {% include 'blog/widgets/article_hotest_other.html' %}
+        {% include 'blog/widgets/article_new.html' %}
+        {% include 'blog/widgets/article_hotest.html' %}
+        {% include 'blog/widgets/flinks.html' %}
+    </div>
+    <!------right end------>
+</div>
+{% endblock %}
